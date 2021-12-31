@@ -5,13 +5,15 @@ import com.henrique.entity.Pessoa;
 import com.henrique.exception.CastroOrazioException;
 import com.henrique.exception.PessoaSemNotException;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-//TDD o nome deste teste
+//TDD testar - implementar - refatorar
 
 public class CadastroPessoasTest {
 
     @Test
+    @DisplayName("Deve criar o cadastro de pessoa") //para criar um nome de melhor visualização
     public void deveCriarOCadastroDePessoas(){
         //cenário e execução
         CadastroPessoas pessoas = new CadastroPessoas();
@@ -21,6 +23,7 @@ public class CadastroPessoasTest {
     }
 
     @Test
+    @DisplayName("Deve adcionar uma pessoa")
     public void deveAdcionarUmaPessoa(){
         //cenário
         CadastroPessoas cadastroPessoas = new CadastroPessoas();
@@ -38,20 +41,25 @@ public class CadastroPessoasTest {
 
     }
 
-    @Test( expected = PessoaSemNotException.class)
+    @Test
+    @DisplayName("Não deve adcionar pessoa com o nome vazio")
     public void naoDeveAdicionarPessoaComNomeVazio(){
         //cenário
         CadastroPessoas cadastroPessoas = new CadastroPessoas();
         Pessoa pessoa = new Pessoa();
-
-        //verificação feita no titulo
-
-        //execução
+        pessoa.setName("henrique");
         cadastroPessoas.adicionar(pessoa);
+
+        //significa que eu espero que o erro aconteça
+        //org.junit.jupiter.api.Assertions.assertThrows(PessoaSemNotException.class, () -> cadastroPessoas.adicionar(pessoa));
+
+        //espero que o erro não aconteça
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow(() ->cadastroPessoas.adicionar(pessoa));
 
     }
 
     @Test
+    @DisplayName("Não deve remover uma pessoa")
     public void deveRemoverUmaPessoa(){
         //cenário
         CadastroPessoas cadastroPessoas = new CadastroPessoas();
@@ -66,14 +74,18 @@ public class CadastroPessoasTest {
         Assertions.assertThat(cadastroPessoas.getPessoa()).isEmpty();
     }
 
-    @Test(expected = CastroOrazioException.class)
+    @Test
+    @DisplayName("Deve lançar erro ao tentar remover pessoa inexistente")
     public void deveLancarErrroAoTentarRemoverPessoaInexistente(){
         //cenário
         CadastroPessoas cadastroPessoas = new CadastroPessoas();
         Pessoa pessoa = new Pessoa();
+       // pessoa.setName("henrique");
+       // cadastroPessoas.adicionar(pessoa);
 
         //execução
-        cadastroPessoas.remover(pessoa);
+        // deve lançar exceção pq removel pessoa que nao existe
+        org.junit.jupiter.api.Assertions.assertThrows(CastroOrazioException.class, () -> cadastroPessoas.remover(pessoa));
     }
 
 }

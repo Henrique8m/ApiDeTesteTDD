@@ -1,49 +1,49 @@
-package com.henrique;
+    package com.henrique;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InOrder;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+    import org.assertj.core.api.Assertions;
+    import org.junit.jupiter.api.Test;
+    import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.List;
+    import java.util.ArrayList;
+    import java.util.List;
 
-//outra forma de criar uma lista de mock
-//@RunWith(MockitoJUnitRunner.class)
-public class MockitoTests {
+    //outra forma de criar uma lista de mockito
+    //@RunWith(MockitoJUnitRunner.class)
+    public class MockitoTests {
 
-//    @Mock
-//   private List<String> lista;
+    //    @Mock
+    //   private List<String> lista;
 
-    @Test
-    public void primeiroTesteMockito(){
-        // criando um objeto mock, este objeto so vai trabalhar com mock, nao aceita incerção de outro tipo
-        //pq os mock não são objetos reais!
-        List<String> list = Mockito.mock(ArrayList.class);
+        public MockitoTests() {
+            super();
+        }
 
-        //esse metodo mocka os 20 elementos na lista
-        Mockito.when(list.size()).thenReturn(20);
-        int size = list.size();
+        @Test
+        public void primeiroTesteMockito(){
+            // criando um objeto mock, este objeto so vai trabalhar com mock, nao aceita incerção de outro tipo
+            //pq os mock não são objetos reais!
+            List<String> list = Mockito.mock(ArrayList.class);
 
-        //testa se tem os vinte elementos na lista
-        Assertions.assertThat(size).isEqualTo(20);
+            //esse metodo mocka os 20 elementos na lista
+            Mockito.when(list.size()).thenReturn(20);
+            int size = list.size();
 
-       //Para verificar se ocorreu chamadas de metodos! o exemplo foi de size.
-     //   Mockito.verify(list).size();
+            //testa se tem os vinte elementos na lista
+            Assertions.assertThat(size).isEqualTo(20);
 
-        // Verifica quantas vezes o metodo foi chamado
-     //   Mockito.verify(list, Mockito.times( 1)).size();
+           //Para verificar se ocorreu chamadas de metodos! o exemplo foi de size.
+         //   Mockito.verify(list).size();
 
-        //Verifica se nao foi chamado
-    //    Mockito.verify(list, Mockito.never()).size();
+            // Verifica quantas vezes o metodo foi chamado
+         //   Mockito.verify(list, Mockito.times( 1)).size();
 
-        //Metodo para verificar se foi executado na ordem descrita
-    //    InOrder inOrder = Mockito.inOrder(list);
-    //    inOrder.verify(list).size();
-    //    inOrder.verify(list).add("");
+            //Verifica se nao foi chamado
+        //    Mockito.verify(list, Mockito.never()).size();
 
+            //Metodo para verificar se foi executado na ordem descrita
+        //    InOrder inOrder = Mockito.inOrder(list);
+        //    inOrder.verify(list).size();
+        //    inOrder.verify(list).add("");
+
+        }
     }
-}
